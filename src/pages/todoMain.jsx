@@ -25,7 +25,7 @@ const TodoMain = () => {
   };
 
   return (
-    <>
+    <style.TodoWrapper>
       <ul>
         {todos.map((todo) => {
           return (
@@ -39,7 +39,7 @@ const TodoMain = () => {
         })}
       </ul>
       <Input getTextFromInput={getTextFromInput} />
-    </>
+    </style.TodoWrapper>
   );
 };
 export default TodoMain;

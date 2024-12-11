@@ -8,8 +8,8 @@ const Input = ({ getTextFromInput }) => {
   };
 
   const handleSubmit = (e) => {
+    if (text.title.trim().length < 1 || text.content.trim().length < 1) return;
     e.preventDefault();
-    if (text.trim().length < 1) return;
     getTextFromInput(text);
     setText("");
   };

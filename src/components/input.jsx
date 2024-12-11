@@ -9,6 +9,7 @@ const Input = ({ getTextFromInput }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (text.trim().length < 1) return;
     getTextFromInput(text);
     setText("");
   };

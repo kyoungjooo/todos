@@ -11,18 +11,20 @@ export const H1 = styled.h1`
   margin: 0;
   margin-bottom: 8px;
   font-size: 28px;
+  line-height: 1;
 `;
 export const TodoWrapper = styled.div`
   margin: 0 auto;
   width: 400px;
-  padding: 12px 0;
-  border: 1px solid;
+  padding: 16px 0;
   border-radius: 4px;
+  background-color: #a2a69f;
 `;
 
 export const TodoContents = styled.div`
   display: flex;
   flex-direction: column;
+  opacity: ${(props) => (props.isChecked ? "50%" : "100%")};
 `;
 
 export const TodoHeader = styled.div`
@@ -53,32 +55,36 @@ export const TodoInner = styled.ul`
 `;
 export const CardItem = styled.li`
   padding: 8px 16px 12px 16px;
-  margin: 0 12px;
+  margin: 0 16px;
   list-style: none;
-  border: 1px solid;
   &:not(:first-of-type) {
     margin-top: 8px;
   }
   border-radius: 4px;
+  background-color: ${(props) => (props.isChecked ? "#D4D5CB" : "#ebece9")};
 `;
 export const TodoTitle = styled.input`
   outline: ${(props) => (props.isEditing ? "none" : "initial")};
   cursor: auto;
-  padding: 4px 8px;
+  padding: 6px 12px;
   font-size: 14px;
   margin-bottom: 6px;
+  border: 0;
+  border-radius: 4px;
 `;
 export const TodoText = styled.textarea`
   outline: ${(props) => (props.isEditing ? "none" : "initial")};
   cursor: auto;
   resize: none;
-  padding: 8px;
+  padding: 8px 12px;
+  height: 30px;
   font-size: 14px;
+  border: 0;
+  border-radius: 4px;
 `;
 
 export const Icon = styled.button`
   font-size: 18px;
-  height: 32px;
   width: 32px;
   padding: 0;
   border: 0;
@@ -86,16 +92,17 @@ export const Icon = styled.button`
   background-color: transparent;
   position: relative;
   top: -1px;
+  opacity: ${(props) => (props.isChecked ? "50%" : "100%")};
 `;
 
 export const IconDel = styled.button`
   font-size: 22px;
-  height: 32px;
   width: 32px;
   padding: 0;
   border: 0;
   cursor: pointer;
   background-color: transparent;
+  opacity: ${(props) => (props.isChecked ? "50%" : "100%")};
 `;
 export const IconCheck = styled.button`
   font-size: 22px;
@@ -103,18 +110,28 @@ export const IconCheck = styled.button`
   border: 0;
   cursor: pointer;
   background-color: transparent;
+  color: #152929;
 `;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 12px;
+  margin: 0 16px;
 `;
-// common
+
 export const Flex = styled.div`
   display: flex;
 `;
 
 export const BaseBtn = styled.button`
-  padding: 8px 0;
+  padding: 12px 0;
   margin-top: 16px;
+  cursor: pointer;
+  background-color: #394338;
+  outline: none;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  &:hover {
+    background-color: #152929;
+  }
 `;

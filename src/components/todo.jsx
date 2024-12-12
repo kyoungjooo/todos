@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as style from "../style/todo.style";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { IoCheckbox } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
 import { useRef } from "react";
@@ -43,7 +44,7 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
   };
 
   return (
-    <style.CardItem key={id} onClick={handleLiClick}>
+    <style.CardItem key={id} onClick={handleLiClick} isChecked={isChecked}>
       <style.TodoHeader>
         <style.Checkbox
           type="checkbox"
@@ -56,16 +57,20 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
           {!isChecked && <IoCheckboxOutline />}
         </style.IconCheck>
         <style.Flex>
-          <style.Icon type="button" onClick={handleEdit}>
-            <FaEdit />
+          <style.Icon type="button" isChecked={isChecked} onClick={handleEdit}>
+            {isEditing ? <FaRegEdit /> : <FaEdit />}
           </style.Icon>
-          <style.IconDel type="button" onClick={(e) => handleDelete(e, todo)}>
+          <style.IconDel
+            type="button"
+            isChecked={isChecked}
+            onClick={(e) => handleDelete(e, todo)}
+          >
             <TiDelete />
           </style.IconDel>
         </style.Flex>
       </style.TodoHeader>
 
-      <style.TodoContents>
+      <style.TodoContents isChecked={isChecked}>
         <style.TodoTitle
           type="text"
           name="title"

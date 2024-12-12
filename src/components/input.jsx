@@ -13,8 +13,9 @@ const Input = ({ getTextFromInput }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!text) return;
     if (text.title.trim().length < 1 || text.content.trim().length < 1) return;
-    console.log("이거는", text);
+
     getTextFromInput(text);
     setText("");
   };

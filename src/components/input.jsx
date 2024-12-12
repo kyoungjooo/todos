@@ -1,15 +1,20 @@
 import { useState } from "react";
+import * as style from "../style/todo.style";
 
 const Input = ({ getTextFromInput }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState({
+    title: "",
+    content: "",
+  });
 
   const createId = () => {
     return Date.now();
   };
 
   const handleSubmit = (e) => {
-    if (text.title.trim().length < 1 || text.content.trim().length < 1) return;
     e.preventDefault();
+    if (text.title.trim().length < 1 || text.content.trim().length < 1) return;
+    console.log("이거는", text);
     getTextFromInput(text);
     setText("");
   };
@@ -20,22 +25,22 @@ const Input = ({ getTextFromInput }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <style.Form onSubmit={handleSubmit}>
+      <style.TodoTitle
         placeholder="제목"
         type="text"
         name="title"
         onChange={getInputValue}
         value={text.title || ""}
       />
-      <textarea
+      <style.TodoText
         name="content"
         placeholder="할 일 입력하기"
         onChange={getInputValue}
         value={text.content || ""}
       />
-      <button type="submit">입력</button>
-    </form>
+      <style.BaseBtn type="submit">입력</style.BaseBtn>
+    </style.Form>
   );
 };
 export default Input;

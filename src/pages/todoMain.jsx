@@ -25,21 +25,24 @@ const TodoMain = () => {
   };
 
   return (
-    <style.TodoWrapper>
-      <ul>
-        {todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              todo={todo}
-              getUpdatedValue={getUpdatedValue}
-              getDeleteTarget={getDeleteTarget}
-            />
-          );
-        })}
-      </ul>
-      <Input getTextFromInput={getTextFromInput} />
-    </style.TodoWrapper>
+    <style.TodoContainer>
+      <style.H1>TodoList</style.H1>
+      <style.TodoWrapper>
+        <style.TodoInner>
+          {todos.map((todo) => {
+            return (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                getUpdatedValue={getUpdatedValue}
+                getDeleteTarget={getDeleteTarget}
+              />
+            );
+          })}
+        </style.TodoInner>
+        <Input getTextFromInput={getTextFromInput} />
+      </style.TodoWrapper>
+    </style.TodoContainer>
   );
 };
 export default TodoMain;

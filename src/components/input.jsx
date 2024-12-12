@@ -13,9 +13,7 @@ const Input = ({ getTextFromInput }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text) return;
-    if (text.title.trim().length < 1 || text.content.trim().length < 1) return;
-
+    if (text.title === undefined || text.content === undefined) return;
     getTextFromInput(text);
     setText("");
   };

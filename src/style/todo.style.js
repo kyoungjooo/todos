@@ -58,7 +58,7 @@ export const CardItem = styled.li`
   margin: 0 16px;
   list-style: none;
   &:not(:first-of-type) {
-    margin-top: 8px;
+    margin-top: 10px;
   }
   border-radius: 4px;
   background-color: ${(props) => (props.isChecked ? "#d4d5cb82" : "#ebece9")};
@@ -116,6 +116,22 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin: 0 16px;
+  position: relative;
+  &:after {
+    content: "";
+    background-color: #000;
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    top: 0;
+    transform: translateY(-100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      #a2a69f 100%
+    );
+    opacity: 0.65;
+  }
 `;
 
 export const Flex = styled.div`

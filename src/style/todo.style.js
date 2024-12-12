@@ -16,7 +16,7 @@ export const H1 = styled.h1`
 export const TodoWrapper = styled.div`
   margin: 0 auto;
   width: 400px;
-  padding: 16px 0;
+  padding: 18px 0;
   border-radius: 4px;
   background-color: #a2a69f;
 `;
@@ -24,7 +24,7 @@ export const TodoWrapper = styled.div`
 export const TodoContents = styled.div`
   display: flex;
   flex-direction: column;
-  opacity: ${(props) => (props.isChecked ? "50%" : "100%")};
+  opacity: ${(props) => (props.isChecked ? "30%" : "100%")};
 `;
 
 export const TodoHeader = styled.div`
@@ -61,14 +61,14 @@ export const CardItem = styled.li`
     margin-top: 8px;
   }
   border-radius: 4px;
-  background-color: ${(props) => (props.isChecked ? "#D4D5CB" : "#ebece9")};
+  background-color: ${(props) => (props.isChecked ? "#d4d5cb82" : "#ebece9")};
 `;
 export const TodoTitle = styled.input`
   outline: ${(props) => (props.isEditing ? "none" : "initial")};
   cursor: auto;
   padding: 6px 12px;
   font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   border: 0;
   border-radius: 4px;
 `;

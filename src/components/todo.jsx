@@ -1,11 +1,11 @@
 import { useState } from "react";
-import * as style from "../style/todo.style";
+import { useRef } from "react";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { IoCheckbox } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
-import { useRef } from "react";
+import * as style from "../style/todo.style";
 
 const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
   const { id } = todo;
@@ -24,7 +24,6 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
     const { name, value } = e.target;
     setUpdated({ ...updated, [name]: value });
     if (!isChecked) getUpdatedValue(updated);
-    //편집이 끝나면 updateInputValue에 값을 전달한다.
   };
 
   const handleDelete = (e, todo) => {
@@ -32,14 +31,10 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
     getDeleteTarget(todo.id);
   };
 
-  const handleChecked = (e) => {
-    setChecked((prev) => !prev); // 상태
-  };
+  const handleChecked = () => setChecked((prev) => !prev);
+
   const handleLiClick = (e) => {
-    // 특정 요소 클릭 시 상태 변경 방지
-    if (e.target.tagName === "BUTTON" || !isEditing) {
-      return;
-    }
+    if (e.target.tagName === "BUTTON" || !isEditing) return;
     handleChecked();
   };
 
@@ -57,19 +52,18 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
           {!isChecked && <IoCheckboxOutline />}
         </style.IconCheck>
         <style.Flex>
-          <style.Icon type="button" isChecked={isChecked} onClick={handleEdit}>
+          <style.Icon type="button" onClick={handleEdit} isChecked={isChecked}>
             {isEditing ? <FaRegEdit /> : <FaEdit />}
           </style.Icon>
           <style.IconDel
             type="button"
-            isChecked={isChecked}
             onClick={(e) => handleDelete(e, todo)}
+            isChecked={isChecked}
           >
             <TiDelete />
           </style.IconDel>
         </style.Flex>
       </style.TodoHeader>
-
       <style.TodoContents isChecked={isChecked}>
         <style.TodoTitle
           type="text"

@@ -11,7 +11,6 @@ const TodoMain = () => {
     setTodos((prev) => [...prev, { id, title, content }]);
   };
 
-  //수정된 투두로 변경하기위해 가져오기
   const getUpdatedValue = (updated) => {
     setTodos((prev) =>
       prev.map((todo) =>

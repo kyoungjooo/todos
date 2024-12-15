@@ -151,3 +151,33 @@ export const BaseBtn = styled.button`
     background-color: #152929;
   }
 `;
+export const Dimmed = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const AlertContent = styled.div`
+  width: 300px;
+  height: 100px;
+  background-color: #fff;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const IconClose = styled.button`
+  font-size: 30px;
+  position: absolute;
+  right: 0;
+  top: 4px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+`;

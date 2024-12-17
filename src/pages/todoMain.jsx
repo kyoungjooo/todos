@@ -1,17 +1,17 @@
 import { useState } from "react";
-import Input from "../components/input";
-import TodoItem from "../components/todo";
-import * as style from "../style/todo.style";
+import AddTodoForm from "../components/AddTodoForm.jsx";
+import TodoItem from "../components/todoItem";
+import * as Style from "../style/todo.style";
 
 const TodoMain = () => {
   const [todos, setTodos] = useState([]);
 
-  const getTextFromInput = (newTodo) => {
+  const addTodo = (newTodo) => {
     const { id, title, content } = newTodo;
     setTodos((prev) => [...prev, { id, title, content }]);
   };
 
-  const getUpdatedValue = (updated) => {
+  const editTodo = (updated) => {
     setTodos((prev) =>
       prev.map((todo) =>
         todo.id === updated.id ? { ...todo, ...updated } : todo
@@ -19,29 +19,29 @@ const TodoMain = () => {
     );
   };
 
-  const getDeleteTarget = (deleted) => {
+  const deleteTodo = (deleted) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== deleted));
   };
 
   return (
-    <style.TodoContainer>
-      <style.H1>TodoList</style.H1>
-      <style.TodoWrapper>
-        <style.TodoInner>
+    <Style.TodoContainer>
+      <Style.H1>TodoList</Style.H1>
+      <Style.TodoWrapper>
+        <Style.TodoInner>
           {todos.map((todo) => {
             return (
               <TodoItem
                 key={todo.id}
                 todo={todo}
-                getUpdatedValue={getUpdatedValue}
-                getDeleteTarget={getDeleteTarget}
+                editTodo={editTodo}
+                deleteTodo={deleteTodo}
               />
             );
           })}
-        </style.TodoInner>
-        <Input getTextFromInput={getTextFromInput} />
-      </style.TodoWrapper>
-    </style.TodoContainer>
+        </Style.TodoInner>
+        <AddTodoForm addTodo={addTodo} />
+      </Style.TodoWrapper>
+    </Style.TodoContainer>
   );
 };
 export default TodoMain;

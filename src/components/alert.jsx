@@ -1,4 +1,4 @@
-import * as style from "../style/todo.style";
+import * as Style from "../style/todo.style";
 import { IoIosClose } from "react-icons/io";
 
 const Alert = ({ children, setIsAlert }) => {
@@ -6,14 +6,14 @@ const Alert = ({ children, setIsAlert }) => {
     setIsAlert((prev) => !prev);
   };
   return (
-    <style.Dimmed>
-      <style.AlertContent>
-        <style.IconClose type="button" onClick={handleCloseAlert}>
+    <Style.Dimmed>
+      <Style.AlertContent>
+        <Style.IconClose type="button" onClick={handleCloseAlert}>
           <IoIosClose />
-        </style.IconClose>
+        </Style.IconClose>
         <div>{children}</div>
-      </style.AlertContent>
-    </style.Dimmed>
+      </Style.AlertContent>
+    </Style.Dimmed>
   );
 };
 export default Alert;

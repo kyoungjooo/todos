@@ -5,9 +5,9 @@ import { IoCheckbox } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
-import * as style from "../style/todo.style";
+import * as Style from "../style/todo.style";
 
-const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
+const TodoItem = ({ todo, editTodo, deleteTodo }) => {
   const { id } = todo;
   const [isChecked, setChecked] = useState(false);
   const [isEditing, setEditing] = useState(true);
@@ -23,12 +23,12 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
   const handleValue = (e) => {
     const { name, value } = e.target;
     setUpdated({ ...updated, [name]: value });
-    if (!isChecked) getUpdatedValue(updated);
+    if (!isChecked) editTodo(updated);
   };
 
   const handleDelete = (e, todo) => {
     e.stopPropagation();
-    getDeleteTarget(todo.id);
+    deleteTodo(todo.id);
   };
 
   const handleChecked = () => setChecked((prev) => !prev);
@@ -39,33 +39,33 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
   };
 
   return (
-    <style.CardItem key={id} onClick={handleLiClick} isChecked={isChecked}>
-      <style.TodoHeader>
-        <style.Checkbox
+    <Style.CardItem key={id} onClick={handleLiClick} isChecked={isChecked}>
+      <Style.TodoHeader>
+        <Style.Checkbox
           type="checkbox"
           name="checkBox"
           checked={isChecked}
           onChange={handleChecked}
         />
-        <style.IconCheck>
+        <Style.IconCheck>
           {isChecked && <IoCheckbox />}
           {!isChecked && <IoCheckboxOutline />}
-        </style.IconCheck>
-        <style.Flex>
-          <style.Icon type="button" onClick={handleEdit} isChecked={isChecked}>
+        </Style.IconCheck>
+        <Style.Flex>
+          <Style.Icon type="button" onClick={handleEdit} isChecked={isChecked}>
             {isEditing ? <FaRegEdit /> : <FaEdit />}
-          </style.Icon>
-          <style.IconDel
+          </Style.Icon>
+          <Style.IconDel
             type="button"
             onClick={(e) => handleDelete(e, todo)}
             isChecked={isChecked}
           >
             <TiDelete />
-          </style.IconDel>
-        </style.Flex>
-      </style.TodoHeader>
-      <style.TodoContents isChecked={isChecked}>
-        <style.TodoTitle
+          </Style.IconDel>
+        </Style.Flex>
+      </Style.TodoHeader>
+      <Style.TodoContents isChecked={isChecked}>
+        <Style.TodoTitle
           type="text"
           name="title"
           value={updated.title}
@@ -74,15 +74,15 @@ const TodoItem = ({ todo, getUpdatedValue, getDeleteTarget }) => {
           ref={inputTitle}
           isEditing={isEditing}
         />
-        <style.TodoText
+        <Style.TodoText
           name="content"
           value={updated.content}
           readOnly={isEditing}
           onChange={handleValue}
           isEditing={isEditing}
         />
-      </style.TodoContents>
-    </style.CardItem>
+      </Style.TodoContents>
+    </Style.CardItem>
   );
 };
 export default TodoItem;

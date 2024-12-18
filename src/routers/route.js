@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import TodoMain from "../pages/todoMain";
+import TodoList from "../pages/todoList";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <TodoMain />,
+    element: <TodoList />,
   },
 ]);
 export default router;

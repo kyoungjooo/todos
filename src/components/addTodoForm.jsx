@@ -1,10 +1,11 @@
 import { useState } from "react";
 import * as Style from "../style/todo.style";
 import Alert from "./alert";
+import { useDispatch } from "react-redux";
 
-const AddTodoForm = ({ addTodo }) => {
+const AddTodoForm = () => {
+  const dispatch = useDispatch();
   const [isAlert, setIsAlert] = useState(false);
-
   const createId = () => Date.now();
 
   const handleSubmitAddTodo = (e) => {
@@ -17,7 +18,12 @@ const AddTodoForm = ({ addTodo }) => {
       content.value.trim().length < 1
     )
       return setIsAlert(true);
-    addTodo({ id: createId(), title: title.value, content: content.value });
+
+    dispatch({
+      type: "add_todo",
+      payload: { id: createId(), title: title.value, content: content.value },
+    });
+
     title.value = "";
     content.value = "";
   };

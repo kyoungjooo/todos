@@ -6,40 +6,53 @@ import { FaRegEdit } from "react-icons/fa";
 import { TiDelete } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
 import * as Style from "../style/todo.style";
+import { useDispatch, useSelector } from "react-redux";
 
-const TodoItem = ({ todo, editTodo, deleteTodo }) => {
-  const { id } = todo;
+const TodoItemCard = ({ todo, key }) => {
+  const todos = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
+  console.log(todos);
+  const [text, setText] = useState({
+    id: todo.id,
+    title: todo.title,
+    content: todo.content,
+  });
+
+  const inputTitle = useRef();
   const [isChecked, setChecked] = useState(false);
   const [isEditing, setEditing] = useState(true);
-  const [updated, setUpdated] = useState(todo);
-  const inputTitle = useRef(null);
 
-  const handleEdit = (e) => {
+  const handleEditMode = (e) => {
     e.stopPropagation();
     setEditing((prev) => !prev);
     return inputTitle.current.focus();
   };
 
-  const handleValue = (e) => {
+  const handleEditText = (e) => {
     const { name, value } = e.target;
-    setUpdated({ ...updated, [name]: value });
-    if (!isChecked) editTodo(updated);
+    setText({ ...text, [name]: value });
+    dispatch({
+      type: "edit_todo",
+      payload: text,
+    });
   };
 
   const handleDelete = (e, todo) => {
     e.stopPropagation();
-    deleteTodo(todo.id);
+    dispatch({
+      type: "delete_todo",
+      payload: todo,
+    });
   };
 
-  const handleChecked = () => setChecked((prev) => !prev);
-
-  const handleLiClick = (e) => {
-    if (e.target.tagName === "BUTTON" || !isEditing) return;
-    handleChecked();
+  const handleChecked = (e) => {
+    if (!isEditing) {
+      return e.stopPropagation();
+    }
+    setChecked((prev) => !prev);
   };
-
   return (
-    <Style.CardItem key={id} onClick={handleLiClick} isChecked={isChecked}>
+    <Style.CardItem key={key} onClick={handleChecked} isChecked={isChecked}>
       <Style.TodoHeader>
         <Style.Checkbox
           type="checkbox"
@@ -52,7 +65,11 @@ const TodoItem = ({ todo, editTodo, deleteTodo }) => {
           {!isChecked && <IoCheckboxOutline />}
         </Style.IconCheck>
         <Style.Flex>
-          <Style.Icon type="button" onClick={handleEdit} isChecked={isChecked}>
+          <Style.Icon
+            type="button"
+            onClick={handleEditMode}
+            isChecked={isChecked}
+          >
             {isEditing ? <FaRegEdit /> : <FaEdit />}
           </Style.Icon>
           <Style.IconDel
@@ -68,21 +85,21 @@ const TodoItem = ({ todo, editTodo, deleteTodo }) => {
         <Style.TodoTitle
           type="text"
           name="title"
-          value={updated.title}
+          value={text.title}
           readOnly={isEditing}
-          onChange={handleValue}
           ref={inputTitle}
           isEditing={isEditing}
+          onChange={handleEditText}
         />
         <Style.TodoText
           name="content"
-          value={updated.content}
           readOnly={isEditing}
-          onChange={handleValue}
+          value={text.content}
           isEditing={isEditing}
+          onChange={handleEditText}
         />
       </Style.TodoContents>
     </Style.CardItem>
   );
 };
-export default TodoItem;
+export default TodoItemCard;

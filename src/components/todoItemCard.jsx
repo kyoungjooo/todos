@@ -9,16 +9,9 @@ import * as Style from "../style/todo.style";
 import { useDispatch, useSelector } from "react-redux";
 
 const TodoItemCard = ({ todo, key }) => {
-  const todos = useSelector((state) => state.todo);
   const dispatch = useDispatch();
-  console.log(todos);
-  const [text, setText] = useState({
-    id: todo.id,
-    title: todo.title,
-    content: todo.content,
-  });
-
   const inputTitle = useRef();
+  const [text, setText] = useState({ ...todo });
   const [isChecked, setChecked] = useState(false);
   const [isEditing, setEditing] = useState(true);
 
@@ -46,9 +39,7 @@ const TodoItemCard = ({ todo, key }) => {
   };
 
   const handleChecked = (e) => {
-    if (!isEditing) {
-      return e.stopPropagation();
-    }
+    if (!isEditing) return e.stopPropagation();
     setChecked((prev) => !prev);
   };
   return (
